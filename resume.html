@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>vCard - Resume</title>
+    <title>Farjanul Nayem - Resume</title>
 
 	<!-- Meta Data -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,6 +38,7 @@
     <!-- Styles -->
 	<link rel="stylesheet" type="text/css" href="../assets/styles/style.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/demo/style-demo.css"/>
+	<script src="common/load.js"></script>
 	
 </head>
 <body class="bg-triangles-2 full-page">
@@ -62,59 +63,12 @@
             </div>
 		</div>
 						
-		<div class="nav-wrap">
-			<ul class="nav">
-                <li class="nav__item"><a href="about.html">About</a></li>
-				<li class="nav__item"><a class="active" href="resume.html">Resume</a></li>
-                <li class="nav__item"><a href="portfolio.html">Portfolio</a></li>
-                <li class="nav__item"><a href="blog.html">Blog</a></li>
-                <li class="nav__item"><a href="contact.html">Contact</a></li>
-            </ul>
-		</div>
+		<div class="nav-wrap" w3-include-html="common/nav.html"></div>
 		
 	    <div class="wrapper sticky-parent">
 			<!-- Sidebar -->
-            <aside class="sidebar">
-			    <div class="sticky-column">
-			        <div class="avatar-wrap">
-				        <svg class="avatar avatar--180" viewBox="0 0 188 188">
-                            <g class="avatar__box">
-                                <image xlink:href="../assets/img/avatar-1.jpg" height="100%" width="100%" />
-                            </g>
-                        </svg>
-				    </div>
-				    <div class="text-center">
-					    <h3 class="title sidebar__user-name"><span class="weight--500">Felecia</span> Brown</h3>
-					    <div class="badge badge--gray">Creative Director</div>
-							
-					    <!-- Social -->
-		                <div class="social">
-		                    <a class="social__link" href="https://www.facebook.com/"><i class="font-icon icon-facebook"></i></a>
-		                    <a class="social__link" href="https://www.behance.com/"><i class="font-icon icon-twitter"></i></a>
-		                    <a class="social__link" href="https://www.linkedin.com/"><i class="font-icon icon-linkedin2"></i></a>
-		                </div>
-				    </div>
-
-				    <ul class="contact-block">
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Birthday">
-						    <i class="font-icon icon-calendar2"></i>March 25, 1995
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Address">
-						    <i class="font-icon icon-map-pin"></i>San-Francisco, USA
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="E-mail">
-						    <a href="mailto:example@mail.com"><i class="font-icon icon-mail"></i>example@mail.com</a>
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Phone">
-						    <i class="font-icon icon-smartphone"></i>+1 (070) 123-4567
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Skype">
-						    <a href="skype:skype-example"><i class="font-icon icon-skype"></i>Felecia_Brown</a>
-					    </li>
-				    </ul>
-                
-				    <a class="btn" href="#"><i class="font-icon icon-download"></i> Download CV</a>
-				</div>
+            <aside class="sidebar" w3-include-html="common/sidebar.html">
+			    
 		    </aside>
 		        
 			<!-- Content -->
@@ -227,26 +181,15 @@
         </clipPath>		
     </svg>
 
-	<!-- Demo Menu -->
-	<div class="btnSlideNav slideOpen"></div>
-    <div class="btnSlideNav slideClose"></div>
-    <ul class="slideNav">
-	    <li class="slideNav__item rtl-mode"><h4 class="title title--5">More pages</h4> <a href="../full-rtl/about.html">RTL</a></li>
-        <li class="slideNav__item"><a href="one-page.html">1. Single page</a></li>
-        <li class="slideNav__item"><a href="background-2.html">2. Background 2</a></li>
-        <li class="slideNav__item"><a href="background-3.html">3. Background 3</a></li>
-		<li class="slideNav__item"><a href="background-4.html">4. Background 4</a></li>
-		<li class="slideNav__item"><a href="background-5.html">5. Background 5</a></li>
-		<li class="slideNav__item"><a href="background-6.html">6. Background 6</a></li>
-    </ul>
-	<div class="overlay-slideNav"></div>
-    <!-- Demo Menu -->	
-
 	<!-- JavaScripts -->
 	<script src="../assets/js/jquery-3.4.1.min.js"></script>
 	<script src="../assets/js/plugins.min.js"></script>
     <script src="../assets/js/common.js"></script>
     
 	<script src="../assets/demo/plugins-demo.js"></script>
+
+	<script>
+		includeHTML();
+	</script>
 </body>
 </html>

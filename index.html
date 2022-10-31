@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Farjanul Nayem</title>
+    <title>Farjanul Nayem - About</title>
 
 	<!-- Meta Data -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,7 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/styles/style.css"/>
 	<link rel="stylesheet" type="text/css" href="assets/demo/style-demo.css"/>
 
-	<script src="load.js"></script>
+	<script src="common/load.js"></script>
 	
 
 </head>
@@ -65,54 +65,12 @@
             </div>
 		</div>
 
-		<div class="nav-wrap" w3-include-html="nav.html"></div>
-		<script>
-			includeHTML();
-		</script>
+		<div class="nav-wrap" w3-include-html="common/nav.html"></div>
 		
 	    <div class="wrapper sticky-parent">
 			<!-- Sidebar -->
-            <aside class="sidebar">
-			    <div class="sticky-column">
-			        <div class="avatar-wrap">
-				        <svg class="avatar avatar--180" viewBox="0 0 188 188">
-                            <g class="avatar__box">
-                                <image xlink:href="https://scontent.fdac31-1.fna.fbcdn.net/v/t39.30808-6/218319702_2999562296935268_1676299481548557971_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFQL7gyetSH8L7WcIrR-43Us5PZr0nv3CGzk9mvSe_cIS8BA0HicSQYFqp0y8ec7M__WtOBXO9LiAOkRNZ0_dGP&_nc_ohc=XVGjWfrxkmMAX8rbfYJ&_nc_ht=scontent.fdac31-1.fna&oh=00_AfAF9Ix12FDnpDpvyMrnReCmjVjI54E6QC6-VyGO1gxuKg&oe=6363AD0F" height="100%" width="100%" />
-                            </g>
-                        </svg>
-				    </div>
-				    <div class="text-center">
-					    <h3 class="title sidebar__user-name"><span class="weight--500">Farjanul</span> Nayem</h3>
-					    <div class="badge badge--gray">Software Engineer</div>
-							
-					    <!-- Social -->
-		                <div class="social">
-		                    <a class="social__link" href="https://www.facebook.com/farjanuln"><i class="font-icon icon-facebook"></i></a>
-		                    <a class="social__link" href="https://www.behance.com/"><i class="font-icon icon-twitter"></i></a>
-		                    <a class="social__link" href="https://www.linkedin.com/farjanuln"><i class="font-icon icon-linkedin2"></i></a>
-		                </div>
-				    </div>
-
-				    <ul class="contact-block">
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Birthday">
-						    <i class="font-icon icon-calendar2"></i>October 06, 1993
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Address">
-						    <i class="font-icon icon-map-pin"></i>Dhaka, Bangladesh
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="E-mail">
-						    <a href="mailto:example@mail.com"><i class="font-icon icon-mail"></i>farjanul10@gmail.com</a>
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Phone">
-						    <i class="font-icon icon-smartphone"></i>+88 01711 070400
-					    </li>
-					    <li class="contact-block__item" data-toggle="tooltip" data-placement="top" title="Skype">
-						    <a href="skype:skype-example"><i class="font-icon icon-skype"></i>farjanul.nayem</a>
-					    </li>
-				    </ul>
-                
-				    <a class="btn" href="#"><i class="font-icon icon-download"></i> Download CV</a>
-				</div>
+            <aside class="sidebar" w3-include-html="common/sidebar.html">
+			    
 		    </aside>
 		        
 			<!-- Content -->
@@ -181,26 +139,15 @@
         </clipPath>		
     </svg>
 
-	<!-- Demo Menu -->
-	<div class="btnSlideNav slideOpen"></div>
-    <div class="btnSlideNav slideClose"></div>
-    <ul class="slideNav">
-	    <li class="slideNav__item rtl-mode"><h4 class="title title--5">More pages</h4> <a href="../full-rtl/about.html">RTL</a></li>
-        <li class="slideNav__item"><a href="one-page.html">1. Single page</a></li>
-        <li class="slideNav__item"><a href="background-2.html">2. Background 2</a></li>
-        <li class="slideNav__item"><a href="background-3.html">3. Background 3</a></li>
-		<li class="slideNav__item"><a href="background-4.html">4. Background 4</a></li>
-		<li class="slideNav__item"><a href="background-5.html">5. Background 5</a></li>
-		<li class="slideNav__item"><a href="background-6.html">6. Background 6</a></li>
-    </ul>
-	<div class="overlay-slideNav"></div>
-    <!-- Demo Menu -->	
-
 	<!-- JavaScripts -->
 	<script src="assets/js/jquery-3.4.1.min.js"></script>
 	<script src="assets/js/plugins.min.js"></script>
     <script src="assets/js/common.js"></script>
     
 	<script src="assets/demo/plugins-demo.js"></script>
+
+	<script>
+		includeHTML();
+	</script>
 </body>
 </html>

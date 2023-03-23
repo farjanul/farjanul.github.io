@@ -1,23 +1,23 @@
 [
     {
-        "company": "Strativ BD Limited",
+        "company": "Synesis IT Ltd.",
+        "designation": "Senior Software Engineer",
+        "location": "Dhaka, bangladesh",
+        "summary": "Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas molestias exceptur.",
+        "date": "November 2022 – Present" 
+    },
+    {
+        "company": "Strativ Bangladesh Ltd.",
         "designation": "Software Engineer",
         "location": "Dhaka, bangladesh",
         "summary": "Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas molestias exceptur.",
-        "date": "October 2022 - October 2022" 
+        "date": "September 2020 – October 2022" 
     },
     {
         "company": "Somoy TV",
         "designation": "Software Engineer",
         "location": "Dhaka, bangladesh",
         "summary": "Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas molestias exceptur.",
-        "date": "October 2022 - October 2022" 
-    },
-    {
-        "company": "CMED Limited",
-        "designation": "Software Engineer",
-        "location": "Dhaka, bangladesh",
-        "summary": "Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas molestias exceptur.",
-        "date": "October 2022 - October 2022" 
+        "date": "January 2018 – August 2020" 
     }
 ]

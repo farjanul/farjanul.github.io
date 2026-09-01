@@ -26,12 +26,12 @@ with isolated and semi-isolated tenancy, plus multi-agent workflows built on LLM
 ### Stack
 
 ```
-Languages     Java · Python · JavaScript
-Backend       Spring Boot · Django · RESTful API · WebSocket · Celery · RabbitMQ
-Data          PostgreSQL · MySQL · MongoDB · Redis · Elasticsearch · VectorDB
-AI            LangChain · RAG · function calling · agentic workflows · embeddings
-Infra         AWS · GCP · Docker · CI/CD · Nginx · Cloudflare · DigitalOcean
-Practice      SOLID · design patterns · clean code · multi-tenancy · Agile
+Languages           Java · Python · JavaScript
+Backend             Spring Boot · Django · RESTful API · WebSocket · Celery · RabbitMQ
+Database & Caching  PostgreSQL · MySQL · MongoDB · Redis · Elasticsearch · VectorDB
+AI Integration      LangChain · RAG · function calling · agentic workflows · embeddings
+Infra               AWS · GCP · Docker · CI/CD · Nginx · Cloudflare · DigitalOcean
+Practice            SOLID · design patterns · clean code · multi-tenancy · Agile
 ```
 
 ---
@@ -49,19 +49,3 @@ work, tuned for reliability under load.
 
 **Team leadership** — code review, engineering standards, and mentoring for
 junior engineers across two companies.
-
----
-
-### Pinned repositories
-
-<!--
-Pin 4-6 repos on your profile. If a project is under an employer and can't be
-public, write a small standalone version that demonstrates the same idea:
-
-  - a Spring Boot multi-tenant starter (schema-per-tenant vs row-level)
-  - a RAG service with pluggable vector backends
-  - a Celery/RabbitMQ job pipeline with retries and dead-letter handling
-
-Each one needs a README, tests, and a Dockerfile. That trio does more for a
-senior profile than ten unfinished repos.
--->

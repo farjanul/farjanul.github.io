@@ -1,4 +1,4 @@
-<h1 align="center">Farjanul Naim</h1>
+<h1 align="center">Mr. Farjanul Naim</h1>
 
 <p align="center">
   Senior Software Engineer · Backend & Architecture · Dhaka, Bangladesh
@@ -26,8 +26,8 @@ with isolated and semi-isolated tenancy, plus multi-agent workflows built on LLM
 ### Stack
 
 ```
-Languages     Java (expert) · Python · JavaScript
-Backend       Spring Boot · Django · REST · WebSocket · Celery · RabbitMQ
+Languages     Java · Python · JavaScript
+Backend       Spring Boot · Django · RESTful API · WebSocket · Celery · RabbitMQ
 Data          PostgreSQL · MySQL · MongoDB · Redis · Elasticsearch · VectorDB
 AI            LangChain · RAG · function calling · agentic workflows · embeddings
 Infra         AWS · GCP · Docker · CI/CD · Nginx · Cloudflare · DigitalOcean

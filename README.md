@@ -65,12 +65,3 @@ public, write a small standalone version that demonstrates the same idea:
 Each one needs a README, tests, and a Dockerfile. That trio does more for a
 senior profile than ten unfinished repos.
 -->
-
----
-
-### Stats
-
-<p align="center">
-  <img height="150" src="https://github-readme-stats.vercel.app/api?username=farjanul&show_icons=true&hide_border=true&theme=transparent" />
-  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=farjanul&layout=compact&hide_border=true&theme=transparent" />
-</p>

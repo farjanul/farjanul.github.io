@@ -2,7 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { Righteous } from "next/font/google";
 import { useAppContext } from "../app/AppContext";
+
+const righteous = Righteous({ subsets: ["latin"], weight: "400" });
 
 interface GitbookHeaderProps {
   onToggleMobileSidebar?: () => void;
@@ -55,7 +58,7 @@ export default function GitbookHeader({
           <button
             type="button"
             onClick={onToggleMobileSidebar}
-            className="lg:hidden p-2 -ml-2 rounded-lg text-tint-strong hover:bg-tint-hover transition-colors flex items-center justify-center cursor-pointer"
+            className="lg:hidden p-2 -ml-2 rounded-lg text-tint-strong hover:bg-tint-hover transition-colors flex items-center justify-center cursor-pointer shrink-0"
             aria-label="Open sidebar"
           >
             <svg viewBox="0 0 448 512" fill="currentColor" className="size-5">
@@ -64,12 +67,9 @@ export default function GitbookHeader({
           </button>
 
           {/* Site Title / Logo */}
-          <Link href="/" className="group flex items-center gap-2.5 min-w-0 shrink no-underline">
-            <div className="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-base shadow-xs shrink-0">
-              <i className="fa-solid fa-book-bookmark text-primary"></i>
-            </div>
-            <div className="text-pretty line-clamp-1 font-heading font-semibold text-base lg:text-lg text-tint-strong">
-              Farjanul Notebook
+          <Link href="/" className="group flex items-center gap-2.5 min-w-0 shrink-0 no-underline">
+            <div className={`text-black dark:text-white text-pretty line-clamp-1 text-2xl lg:text-3xl tracking-wide select-none ${righteous.className}`}>
+              Farjanul Notes
             </div>
           </Link>
         </div>
@@ -77,7 +77,7 @@ export default function GitbookHeader({
         {/* Right: Search, Language Dropdown, Add Content, Theme Switcher, Admin (if admin) */}
         <div className="flex items-center gap-2 sm:gap-3 order-last">
           {/* Search bar */}
-          <div className="relative flex items-center">
+          <div className="relative hidden sm:flex items-center">
             <div className="relative flex items-center rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-subtle focus-within:bg-tint-subtle focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 px-2.5 sm:px-3 py-1.5 transition-all text-xs w-32 sm:w-52 md:w-64">
               <svg viewBox="0 0 512 512" fill="currentColor" className="size-3.5 text-tint-strong/5 shrink-0 mr-1.5 sm:mr-2">
                 <path fill="currentColor" d="M368 208a160 160 0 1 0 -320 0 160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208S93.1 0 208 0 416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z" />
@@ -98,7 +98,7 @@ export default function GitbookHeader({
           {/* "+ নতুন কনটেন্ট" Button */}
           <Link
             href="/add-content"
-            className="bg-emerald-600 hover:bg-emerald-500 active:scale-95 px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all shrink-0 no-underline"
+            className="hidden sm:flex bg-emerald-600 hover:bg-emerald-500 active:scale-95 px-3 py-1.5 rounded-xl text-xs font-semibold items-center gap-1.5 shadow-sm transition-all shrink-0 no-underline"
             title={language === "bn" ? "নতুন কনটেন্ট তৈরি করুন" : "Add New Content"}
           >
             <i className="fa-solid fa-plus text-xs"></i>
@@ -141,7 +141,7 @@ export default function GitbookHeader({
             href="https://github.com/farjanul"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline hover:text-primary"
+            className="flex p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors items-center justify-center size-8 shrink-0 no-underline hover:text-primary"
             title="GitHub: farjanul"
             aria-label="GitHub Profile"
           >
@@ -153,7 +153,7 @@ export default function GitbookHeader({
             href="https://www.linkedin.com/in/farjanuln/"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline hover:text-[#0a66c2]"
+            className="flex p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors items-center justify-center size-8 shrink-0 no-underline hover:text-[#0a66c2]"
             title="LinkedIn: farjanuln"
             aria-label="LinkedIn Profile"
           >

@@ -270,30 +270,38 @@ export default function GitbookSidebar({
       </aside>
 
       {/* Mobile Drawer Sidebar */}
-      {isMobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex">
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
-            onClick={onCloseMobile}
-          ></div>
+      <div 
+        className={`lg:hidden fixed inset-0 z-50 flex transition-all duration-300 ${
+          isMobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className={`fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300 ${
+            isMobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={onCloseMobile}
+        ></div>
 
-          {/* Drawer content */}
-          <div className="side-sheet fixed inset-y-0 z-50 left-0 max-w-[calc(100%-4.5rem)] w-4/5 md:w-1/2 bg-tint-base border-r border-tint-subtle h-full p-4 flex flex-col min-h-0 gap-4 shadow-xl">
-            <div className="flex items-center justify-between pb-3 border-b border-tint-subtle mb-1">
-              <span className="font-heading font-semibold text-tint-strong">Navigation</span>
-              <button
-                type="button"
-                onClick={onCloseMobile}
-                className="p-1 rounded text-tint-strong/6 hover:text-tint-strong text-xl leading-none cursor-pointer"
-              >
-                &times;
-              </button>
-            </div>
-            {sidebarBody}
+        {/* Drawer content */}
+        <div 
+          className={`side-sheet fixed inset-y-0 z-50 left-0 max-w-[calc(100%-4.5rem)] w-4/5 md:w-1/2 bg-tint-base border-r border-tint-subtle h-full p-4 flex flex-col min-h-0 gap-4 shadow-xl transition-transform duration-300 ease-in-out ${
+            isMobileOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-center justify-between pb-3 border-b border-tint-subtle mb-1">
+            <span className="font-heading font-semibold text-tint-strong">Navigation</span>
+            <button
+              type="button"
+              onClick={onCloseMobile}
+              className="p-1 rounded text-tint-strong/6 hover:text-tint-strong text-xl leading-none cursor-pointer"
+            >
+              &times;
+            </button>
           </div>
+          {sidebarBody}
         </div>
-      )}
+      </div>
     </>
   );
 }

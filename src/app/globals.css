@@ -320,6 +320,8 @@ article pre code {
 
 .article-table-scroll {
   overflow-x: auto;
+  width: 100%;
+  display: block;
 }
 
 /* ── Table itself ─────────────────────────────────────────── */

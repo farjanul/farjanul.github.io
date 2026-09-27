@@ -1,9 +1,32 @@
 "use server";
 
 import { prisma } from "../lib/prisma";
-import { getSession } from "../lib/session";
+import { slugify } from "../lib/slug";
+import {
+  getContentGroups as getDbContentGroups,
+  getTopics as getDbTopics,
+  getContentBySlug as getDbContentBySlug,
+  getContents as getDbContents,
+} from "../lib/data";
+
+export async function getContentGroups() {
+  return await getDbContentGroups();
+}
+
+export async function getTopics() {
+  return await getDbTopics();
+}
+
+export async function getContentBySlug(slug: string) {
+  return await getDbContentBySlug(slug);
+}
+
+export async function getContents() {
+  return await getDbContents();
+}
 
 async function checkAdmin() {
+  const { getSession } = await import("../lib/session");
   const session = await getSession();
   if (!session.isLoggedIn) {
     throw new Error("Unauthorized: Admin access required.");
@@ -11,12 +34,12 @@ async function checkAdmin() {
 }
 
 // ================= Content Groups =================
-export async function createContentGroup(data: { name: string, position: number }) {
+export async function createContentGroup(data: { name: string; position: number }) {
   await checkAdmin();
   return await prisma.contentGroup.create({ data });
 }
 
-export async function updateContentGroup(id: number, data: { name: string, position: number }) {
+export async function updateContentGroup(id: number, data: { name: string; position: number }) {
   await checkAdmin();
   return await prisma.contentGroup.update({ where: { id }, data });
 }
@@ -26,35 +49,13 @@ export async function deleteContentGroup(id: number) {
   return await prisma.contentGroup.delete({ where: { id } });
 }
 
-export async function getContentGroups() {
-  const groups = await prisma.contentGroup.findMany({
-    orderBy: { position: "asc" },
-    include: {
-      topics: {
-        orderBy: { position: "asc" },
-        include: {
-          contents: {
-            orderBy: { position: "asc" }
-          }
-        }
-      },
-      contents: {
-        where: { topic_id: null },
-        orderBy: { position: "asc" }
-      }
-    }
-  });
-
-  return groups;
-}
-
 // ================= Topics =================
-export async function createTopic(data: { group_id: number, title: string, icon?: string | null, position: number }) {
+export async function createTopic(data: { group_id: number; title: string; icon?: string | null; position: number }) {
   await checkAdmin();
   return await prisma.topic.create({ data: data as any });
 }
 
-export async function updateTopic(id: number, data: { group_id: number, title: string, icon?: string | null, position: number }) {
+export async function updateTopic(id: number, data: { group_id: number; title: string; icon?: string | null; position: number }) {
   await checkAdmin();
   return await prisma.topic.update({ where: { id }, data: data as any });
 }
@@ -63,14 +64,6 @@ export async function deleteTopic(id: number) {
   await checkAdmin();
   return await prisma.topic.delete({ where: { id } });
 }
-
-export async function getTopics() {
-  return await prisma.topic.findMany({
-    orderBy: { position: "asc" }
-  });
-}
-
-import { slugify } from "../lib/slug";
 
 async function getUniqueSlug(baseSlug: string, currentId?: number): Promise<string> {
   let slug = baseSlug || "content";
@@ -86,39 +79,23 @@ async function getUniqueSlug(baseSlug: string, currentId?: number): Promise<stri
 }
 
 // ================= Contents =================
-export async function createContent(data: { group_id: number, topic_id?: number | null, title: string, slug?: string | null, icon?: string | null, body_en: string, body_bn: string, position: number }) {
+export async function createContent(data: { group_id: number; topic_id?: number | null; title: string; slug?: string | null; icon?: string | null; body_en: string; body_bn: string; position: number }) {
   await checkAdmin();
   const base = data.slug ? slugify(data.slug) : slugify(data.title);
   const uniqueSlug = await getUniqueSlug(base);
   return await prisma.content.create({ data: { ...data, slug: uniqueSlug } as any });
 }
 
-export async function updateContent(id: number, data: { group_id: number, topic_id?: number | null, title: string, slug?: string | null, icon?: string | null, body_en: string, body_bn: string, position: number }) {
+export async function updateContent(id: number, data: { group_id: number; topic_id?: number | null; title: string; slug?: string | null; icon?: string | null; body_en: string; body_bn: string; position: number }) {
   await checkAdmin();
   const base = data.slug ? slugify(data.slug) : slugify(data.title);
   const uniqueSlug = await getUniqueSlug(base, id);
   return await prisma.content.update({ where: { id }, data: { ...data, slug: uniqueSlug } as any });
 }
 
-export async function getContentBySlug(slug: string) {
-  return await prisma.content.findUnique({
-    where: { slug },
-    include: {
-      group: true,
-      topic: true,
-    }
-  });
-}
-
 export async function deleteContent(id: number) {
   await checkAdmin();
   return await prisma.content.delete({ where: { id } });
-}
-
-export async function getContents() {
-  return await prisma.content.findMany({
-    orderBy: { position: "asc" }
-  });
 }
 
 // ================= Bulk Operations =================

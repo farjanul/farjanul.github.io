@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getContentGroups } from "../app/actions";
+import { getContentGroups } from "../lib/data";
 import { useAppContext } from "../app/AppContext";
 
 type ContentItem = {

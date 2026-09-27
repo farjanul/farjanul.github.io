@@ -32,17 +32,12 @@ jobs:
 
       - name: Prepare for Static Export
         run: |
-          # 1. Enable static export in next.config.ts
-          sed -i 's/basePath: repo || undefined,/output: "export",\n  basePath: repo || undefined,/' next.config.ts
-          
-          # 2. Delete Admin pages to prevent build errors
+          # 1. Delete Admin pages and server actions to prepare static site
           rm -rf src/app/admin
           rm -rf src/app/add-content
+          rm -f src/app/actions.ts
           
-          # 3. Remove "use server" from main actions so Prisma runs statically at build time
-          sed -i '/"use server";/d' src/app/actions.ts
-          
-          # 4. Mock admin actions to avoid cookie/session errors during build
+          # 2. Mock admin actions to avoid session errors during build
           mkdir -p src/app/admin
           cat << 'EOF' > src/app/admin/actions.ts
           export async function loginUser() { return { success: false }; }
@@ -52,14 +47,12 @@ jobs:
 
       - name: Generate Prisma Client
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+          DATABASE_URL: "file:./dev.db"
         run: npx prisma generate
 
       - name: Build with Next.js
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+          DATABASE_URL: "file:./dev.db"
           GITHUB_ACTIONS: "true"
         run: npm run build
 

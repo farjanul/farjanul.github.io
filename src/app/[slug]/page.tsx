@@ -1,5 +1,8 @@
-import HomePage from "../page";
+import HomePageClient from "../../components/HomePageClient";
+import { getContentGroups } from "../../lib/data";
 import { prisma } from "../../lib/prisma";
+
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
   try {
@@ -21,6 +24,6 @@ export default async function ContentSlugPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  return <HomePage initialSlug={slug} />;
+  const groups = (await getContentGroups()) as any;
+  return <HomePageClient initialGroups={groups || []} initialSlug={slug} />;
 }
-

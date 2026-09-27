@@ -58,7 +58,6 @@ ehthumbs.db
 # local database files & dumps
 *.sqlite
 *.sqlite3
-*.db
 *.db-journal
 
 # typescript

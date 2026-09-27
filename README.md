@@ -88,11 +88,7 @@ GitHub Actions requires your Neon connection string during the build step:
 3. Click **New repository secret** and add the following two secrets:
    - **`DATABASE_URL`**: Your Neon Pooled connection string:
      ```
-     postgresql://user:password@hostname:5432/dbname?sslmode=require
-     ```
-   - **`DIRECT_URL`**: Your Neon Direct connection string:
-     ```
-     postgresql://user:password@hostname:5432/dbname?sslmode=require
+     DATABASE_URL="file:./dev.db"
      ```
 
 ---

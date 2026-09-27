@@ -125,77 +125,7 @@ export default nextConfig;
 
 ---
 
-### 4. GitHub Actions Workflow File
-
-The workflow file is located at [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml):
-
-```yaml
-name: Deploy Next.js to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main
-      - master
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Generate Prisma Client
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
-        run: npx prisma generate
-
-      - name: Build Next.js Static Export
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DIRECT_URL: ${{ secrets.DIRECT_URL }}
-        run: npm run build
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
----
-
-### 5. Enabling GitHub Pages
+### 4. Enabling GitHub Pages
 
 1. In your GitHub repository, click **Settings** ➔ **Pages**.
 2. Under **Build and deployment** ➔ **Source**, select **GitHub Actions**.
@@ -216,18 +146,6 @@ jobs:
 
 ---
 
-## ⚡ Alternative: 1-Click Deployment to Vercel (Full-Stack Recommended)
-
-If you require **live, real-time database write operations** on production directly from the `/add-content` web interface without rebuilding:
-
-1. Import your GitHub repository to [Vercel](https://vercel.com/).
-2. Under **Settings ➔ Environment Variables**, add:
-   - `DATABASE_URL` = *(Your Neon Pooled connection string)*
-   - `DIRECT_URL` = *(Your Neon Direct connection string)*
-3. Click **Deploy**. Vercel natively runs Next.js Server Components and Server Actions in a serverless environment.
-
----
-
 ## 💻 Local Development Guide
 
 ### 1. Prerequisites
@@ -244,8 +162,7 @@ npm install
 ### 3. Environment Variables
 Ensure your `.env` file contains your Neon database connection strings:
 ```env
-DATABASE_URL="postgresql://user:password@hostname:5432/dbname?sslmode=require"
-DIRECT_URL="postgresql://user:password@hostname:5432/dbname?sslmode=require"
+DATABASE_URL="file:./dev.db"
 ```
 
 ### 4. Database Setup

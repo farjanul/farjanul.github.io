@@ -1,10 +1,8 @@
-name: Deploy Next.js to GitHub Pages
+name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -20,17 +18,37 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source Code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Dependencies
+          node-version: "20"
+          cache: npm
+          
+      - name: Install dependencies
         run: npm ci
+
+      - name: Prepare for Static Export
+        run: |
+          # 1. Enable static export in next.config.ts
+          sed -i 's/basePath: repo || undefined,/output: "export",\n  basePath: repo || undefined,/' next.config.ts
+          
+          # 2. Delete Admin pages to prevent build errors
+          rm -rf src/app/admin
+          rm -rf src/app/add-content
+          
+          # 3. Remove "use server" from main actions so Prisma runs statically at build time
+          sed -i '/"use server";/d' src/app/actions.ts
+          
+          # 4. Mock admin actions to avoid cookie/session errors during build
+          mkdir -p src/app/admin
+          cat << 'EOF' > src/app/admin/actions.ts
+          export async function loginUser() { return { success: false }; }
+          export async function logoutUser() { return { success: true }; }
+          export async function checkSessionUser() { return { isLoggedIn: false }; }
+          EOF
 
       - name: Generate Prisma Client
         env:
@@ -38,13 +56,14 @@ jobs:
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
         run: npx prisma generate
 
-      - name: Build Next.js Static Export
+      - name: Build with Next.js
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
+          GITHUB_ACTIONS: "true"
         run: npm run build
 
-      - name: Upload Pages Artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

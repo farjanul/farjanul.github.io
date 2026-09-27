@@ -1,0 +1,458 @@
+/* Base styles for admin pages */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tiptap & Article Content Styles */
+.tiptap-content p, article p {
+  margin-bottom: 1em;
+  line-height: 1.75;
+  color: rgb(var(--tint-12));
+}
+.tiptap-content h2, article h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-top: 1.75em;
+  margin-bottom: 0.6em;
+  color: rgb(var(--tint-12));
+}
+.tiptap-content h3, article h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.5em;
+  color: rgb(var(--tint-12));
+}
+.tiptap-content a, article a {
+  color: rgb(var(--primary-9, 52 109 219));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tiptap-content a:hover, article a:hover {
+  color: rgb(var(--primary-10, 80 139 252));
+}
+.tiptap-content ul, article ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+  color: rgb(var(--tint-12));
+}
+.tiptap-content ol, article ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+  color: rgb(var(--tint-12));
+}
+.tiptap-content li, article li {
+  margin-bottom: 0.35em;
+}
+.tiptap-content code, article code {
+  background-color: rgb(var(--tint-3, 43 44 45));
+  color: rgb(var(--tint-12, 254 255 255));
+  padding: 0.2em 0.45em;
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.88em;
+  border: 1px solid rgb(var(--tint-5, 52 54 55));
+}
+
+/* ==========================================================================
+   Code Block Card & High-Contrast Syntax Highlighting (Atom One Dark)
+   ========================================================================== */
+
+/* ── Code block outer card ─────────────────────────────────── */
+.code-block-wrapper {
+  margin: 1.75em 0;
+  border-radius: 12px;
+  border: 1px solid #313640;
+  background-color: #282c34;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+/* ── Code block header bar ─────────────────────────────────── */
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  background-color: #21252b;
+  border-bottom: 1px solid #313640;
+}
+
+/* macOS dots */
+.code-block-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.code-block-dots span {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.code-block-dots .dot-red   { background: #ff5f56; }
+.code-block-dots .dot-yellow{ background: #ffbd2e; }
+.code-block-dots .dot-green { background: #27c93f; }
+
+/* Language badge */
+.code-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: #2c313a;
+  border: 1px solid #4b5263;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #61afef;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Copy button */
+.copy-code-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #2c313a;
+  border: 1px solid #4b5263;
+  color: #abb2bf;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1;
+}
+.copy-code-btn:hover {
+  background: #3e4451;
+  color: #e6e6e6;
+  border-color: #5c6370;
+}
+.copy-code-btn.copied {
+  color: #98c379;
+  border-color: #3e5c3e;
+  background: #1e2a1e;
+}
+
+/* ── The pre block itself ───────────────────────────────────── */
+.code-block-wrapper pre,
+.tiptap-content pre,
+article pre {
+  margin: 0;
+  background-color: #282c34;
+  color: #abb2bf;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0;
+  border: none;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.code-block-wrapper pre code,
+.tiptap-content pre code,
+article pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* ── Syntax Highlighting (Atom One Dark palette) ──────────── */
+.hljs-comment, .hljs-quote       { color: #5c6370; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-subst { color: #c678dd; font-weight: 600; }
+.hljs-string, .hljs-doctag, .hljs-regexp       { color: #98c379; }
+.hljs-number, .hljs-literal, .hljs-boolean      { color: #d19a66; }
+.hljs-attr, .hljs-property                      { color: #e5c07b; }
+.hljs-attribute                                 { color: #e5c07b; }
+.hljs-variable, .hljs-template-variable         { color: #e06c75; }
+.hljs-variable.constant_                        { color: #e06c75; }
+.hljs-title, .hljs-section                      { color: #61afef; font-weight: 600; }
+.hljs-title.function_                           { color: #61afef; }
+.hljs-title.class_, .hljs-type                  { color: #e5c07b; }
+.hljs-class .hljs-title                         { color: #e5c07b; }
+.hljs-built_in, .hljs-builtin-name              { color: #56b6c2; }
+.hljs-params                                    { color: #abb2bf; }
+.hljs-tag, .hljs-name                           { color: #e06c75; }
+.hljs-punctuation                               { color: #abb2bf; }
+.hljs-symbol, .hljs-bullet, .hljs-link         { color: #61afef; }
+.hljs-meta                                      { color: #e5c07b; }
+
+/* ==========================================================================
+   Table Card & Reading Area Styling
+   ========================================================================== */
+.article-table-wrapper {
+  margin: 1.75em 0 !important;
+  border-radius: 12px !important;
+  background-color: #F9FAFB !important;
+  overflow: hidden !important;
+}
+
+.dark .article-table-wrapper {
+  background-color: #16181d !important;
+}
+
+.code-block-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 16px !important;
+  background-color: #1e222b !important;
+  border-bottom: 1px solid #2d3139 !important;
+  user-select: none !important;
+}
+
+.code-block-wrapper pre,
+.tiptap-content pre, 
+article pre {
+  margin: 0 !important;
+  background-color: #16181d !important;
+  color: #abb2bf !important;
+  padding: 1.25rem 1.5rem !important;
+  border-radius: 0 !important;
+  border: none !important;
+  overflow-x: auto !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  font-size: 13.5px !important;
+  line-height: 1.7 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.code-block-wrapper pre code,
+.tiptap-content pre code, 
+article pre code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  color: inherit !important;
+}
+
+/* Syntax Highlighting Tokens (High Contrast Modern Theme) */
+.hljs-comment,
+.hljs-quote {
+  color: #7f848e !important;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #c678dd !important; /* purple */
+  font-weight: 600;
+}
+.hljs-string,
+.hljs-doctag,
+.hljs-regexp {
+  color: #98c379 !important; /* soft emerald/green */
+}
+.hljs-number,
+.hljs-literal,
+.hljs-boolean {
+  color: #d19a66 !important; /* warm orange */
+}
+.hljs-attr,
+.hljs-property,
+.hljs-attribute {
+  color: #e5c07b !important; /* warm yellow / gold */
+  font-weight: 500;
+}
+.hljs-variable,
+.hljs-template-variable,
+.hljs-variable.constant_ {
+  color: #e06c75 !important; /* red/coral */
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-section {
+  color: #61afef !important; /* blue/cyan */
+  font-weight: 600;
+}
+.hljs-title.class_,
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #e5c07b !important; /* yellow */
+}
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #56b6c2 !important; /* teal */
+}
+.hljs-params {
+  color: #abb2bf !important;
+}
+.hljs-tag,
+.hljs-name {
+  color: #e06c75 !important;
+}
+.hljs-punctuation {
+  color: #abb2bf !important;
+}
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #61afef !important;
+}
+.hljs-meta {
+  color: #e5c07b !important;
+}
+
+/* ── Table header bar ─────────────────────────────────────── */
+.article-table-header {
+  display: none;
+}
+
+.article-table-scroll {
+  overflow-x: auto;
+}
+
+/* ── Table itself ─────────────────────────────────────────── */
+.tiptap-content table,
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.tiptap-content th,
+article th {
+  background-color: rgb(var(--tint-subtle, 247 247 247) / 0.6);
+  color: inherit;
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgb(var(--tint-6, 80 81 82) / 0.4);
+  border-right: none;
+}
+
+.tiptap-content th:last-child,
+article th:last-child {
+  border-right: none;
+}
+
+.tiptap-content td,
+article td {
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid rgb(var(--tint-6, 80 81 82) / 0.2);
+  color: inherit;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+.tiptap-content td p,
+article td p {
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+.tiptap-content td:last-child,
+article td:last-child {
+  border-right: none;
+}
+
+.tiptap-content tr:last-child td,
+article tr:last-child td {
+  border-bottom: none;
+}
+
+.tiptap-content tbody tr:hover td,
+article tbody tr:hover td {
+  background-color: rgb(var(--tint-subtle, 247 247 247) / 0.3);
+}
+
+/* Selected cell styling in Tiptap */
+.tiptap-content .selectedCell:after {
+  z-index: 2;
+  position: absolute;
+  content: "";
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(52, 109, 219, 0.15);
+  pointer-events: none;
+}
+
+.tiptap-content .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: #3b82f6;
+  pointer-events: none;
+}
+
+.tiptap-content blockquote, article blockquote {
+  border-left: 3px solid rgb(var(--primary-9, 52 109 219));
+  padding-left: 1rem;
+  color: rgb(var(--tint-11, 190 192 197));
+  font-style: italic;
+  margin: 1.25em 0;
+}
+
+.tiptap-content img, article img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+}
+
+/* Sidebar hover effects */
+button:hover {
+  /* handled inline */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h2, article h2, .tiptap-content h2 {
+  scroll-margin-top: 5.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sleek custom scrollbars for sidebars */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 9999px;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
+
+/* GitBook desktop sidebars fixed height & sticky positioning */
+@media (min-width: 1024px) {
+  aside.side-sheet {
+    position: sticky !important;
+    top: 4rem !important;
+    height: calc(100vh - 4rem) !important;
+    max-height: calc(100vh - 4rem) !important;
+  }
+}

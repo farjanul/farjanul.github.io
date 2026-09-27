@@ -9,6 +9,7 @@ import {
   createContent, updateContent, deleteContent, getContents,
   bulkDeleteGroups, bulkDeleteTopics, bulkDeleteContents
 } from "../actions";
+import { logoutUser } from "../admin/actions";
 import { slugify } from "../../lib/slug";
 import TiptapEditor from "../../components/TiptapEditor";
 import IconPicker from "../../components/IconPicker";
@@ -398,11 +399,9 @@ export default function ContentManagementPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <button
               onClick={() => {
-                import("@/app/admin/actions").then((module) => {
-                  module.logoutUser().then(() => {
-                    setIsAdmin(false);
-                    router.push("/admin");
-                  });
+                logoutUser().then(() => {
+                  setIsAdmin(false);
+                  router.push("/admin");
                 });
               }}
               style={{ padding: "8px 16px", borderRadius: "8px", background: "#fee2e2", color: "#b91c1c", border: "none", fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}

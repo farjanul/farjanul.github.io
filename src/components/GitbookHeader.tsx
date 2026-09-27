@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Righteous } from "next/font/google";
 import { useAppContext } from "../app/AppContext";
-
+import { logoutUser } from "../app/admin/actions";
 const righteous = Righteous({ subsets: ["latin"], weight: "400" });
 
 interface GitbookHeaderProps {
@@ -120,11 +120,9 @@ export default function GitbookHeader({
               <button
                 type="button"
                 onClick={() => {
-                  import("@/app/admin/actions").then((module) => {
-                    module.logoutUser().then(() => {
-                      setIsAdmin(false);
-                      window.location.href = "/";
-                    });
+                  logoutUser().then(() => {
+                    setIsAdmin(false);
+                    window.location.href = "/";
                   });
                 }}
                 className="p-2 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 dark:border-red-900/30 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 transition-colors flex items-center justify-center size-8 shrink-0 cursor-pointer"

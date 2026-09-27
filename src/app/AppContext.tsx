@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-
+import { checkSessionUser } from "./admin/actions";
 type AppContextType = {
   language: "en" | "bn";
   setLanguage: (lang: "en" | "bn") => void;
@@ -37,12 +37,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Check if admin is logged in securely from server
-    import("@/app/admin/actions").then((module) => {
-      module.checkSessionUser().then((res) => {
-        setIsAdmin(res.isLoggedIn);
-      }).catch(() => {
-        setIsAdmin(false);
-      });
+    checkSessionUser().then((res) => {
+      setIsAdmin(res.isLoggedIn);
+    }).catch(() => {
+      setIsAdmin(false);
     });
   }, []);
 

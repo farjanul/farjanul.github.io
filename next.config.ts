@@ -11,7 +11,6 @@ if (isGithubActions && process.env.GITHUB_REPOSITORY) {
 }
 
 const nextConfig: NextConfig = {
-  output: isGithubActions ? "export" : undefined,
   basePath: repo || undefined,
   images: {
     unoptimized: true,

@@ -36,11 +36,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    // Check if admin is logged in
-    const adminStatus = localStorage.getItem("isAdmin");
-    if (adminStatus === "true") {
-      setIsAdmin(true);
-    }
+    // Check if admin is logged in securely from server
+    import("@/app/admin/actions").then((module) => {
+      module.checkSessionUser().then((res) => {
+        setIsAdmin(res.isLoggedIn);
+      }).catch(() => {
+        setIsAdmin(false);
+      });
+    });
   }, []);
 
   const handleSetLanguage = (lang: "en" | "bn") => {
@@ -52,9 +55,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const handleSetAdmin = (status: boolean) => {
     setIsAdmin(status);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("isAdmin", status ? "true" : "false");
-    }
   };
 
   return (

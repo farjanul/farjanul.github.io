@@ -119,7 +119,14 @@ export default function GitbookHeader({
               </Link>
               <button
                 type="button"
-                onClick={() => setIsAdmin(false)}
+                onClick={() => {
+                  import("@/app/admin/actions").then((module) => {
+                    module.logoutUser().then(() => {
+                      setIsAdmin(false);
+                      window.location.href = "/";
+                    });
+                  });
+                }}
                 className="p-2 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 dark:border-red-900/30 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 transition-colors flex items-center justify-center size-8 shrink-0 cursor-pointer"
                 title={language === "bn" ? "লগআউট" : "Logout"}
                 aria-label="Logout"

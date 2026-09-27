@@ -53,7 +53,6 @@ The application consists of two integrated components:
 | **Framework** | Next.js 16 (App Router) | Server Components, Server Actions, Dynamic Routes |
 | **Language** | TypeScript | Full static type-safety across frontend and backend |
 | **Styling** | Tailwind CSS + Custom CSS Tokens | Design system tokens, light/dark themes |
-| **Database** | Neon (Serverless PostgreSQL) | Cloud database with connection pooling |
 | **ORM** | Prisma ORM | Type-safe queries and automated schema migrations |
 | **Rich Text** | TipTap Editor | Embedded rich-text editing in the admin panel |
 | **Syntax** | Highlight.js | Automatic code syntax highlighting |

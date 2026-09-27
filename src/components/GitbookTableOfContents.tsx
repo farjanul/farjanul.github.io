@@ -20,10 +20,10 @@ export default function GitbookTableOfContents({ contentHtml }: GitbookTableOfCo
     // Initialize theme state from storage / document
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("theme");
-      if (saved === "light") {
-        setTheme("light");
-      } else {
+      if (saved === "dark") {
         setTheme("dark");
+      } else {
+        setTheme("light");
       }
     }
   }, []);

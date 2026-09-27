@@ -19,18 +19,18 @@ export default function GitbookHeader({
   searchQuery = "",
 }: GitbookHeaderProps) {
   const { language, isAdmin, setIsAdmin } = useAppContext();
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // Check initial dark mode from document or storage
+    // Check initial theme from storage or document
     if (typeof document !== "undefined") {
       const saved = localStorage.getItem("theme");
-      if (saved === "light") {
-        document.documentElement.classList.remove("dark");
-        setIsDark(false);
-      } else {
+      if (saved === "dark") {
         document.documentElement.classList.add("dark");
         setIsDark(true);
+      } else {
+        document.documentElement.classList.remove("dark");
+        setIsDark(false);
       }
     }
   }, []);

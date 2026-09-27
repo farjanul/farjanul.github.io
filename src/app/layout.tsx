@@ -16,18 +16,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark rounded-corners theme-clean no-tint sidebar-filled sidebar-list-default links-default depth-subtle font-Inter sheet-open:gutter-stable ${geistSans.variable} antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`rounded-corners theme-clean no-tint sidebar-filled sidebar-list-default links-default depth-subtle font-Inter sheet-open:gutter-stable ${geistSans.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
                 const savedTheme = localStorage.getItem("theme");
-                if (savedTheme === "light") {
-                  document.documentElement.classList.remove("dark");
-                } else {
+                if (savedTheme === "dark") {
                   document.documentElement.classList.add("dark");
-                  if (!savedTheme) localStorage.setItem("theme", "dark");
+                } else {
+                  document.documentElement.classList.remove("dark");
                 }
               } catch (e) {}
             `,

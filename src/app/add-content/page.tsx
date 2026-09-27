@@ -22,7 +22,7 @@ type ScreenType =
   | "add-group";
 
 export default function ContentManagementPage() {
-  const { isAdmin } = useAppContext();
+  const { isAdmin, setIsAdmin } = useAppContext();
   const router = useRouter();
 
   // Active Screen / Page view
@@ -396,6 +396,15 @@ export default function ContentManagementPage() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <button
+              onClick={() => {
+                setIsAdmin(false);
+                router.push("/admin");
+              }}
+              style={{ padding: "8px 16px", borderRadius: "8px", background: "#fee2e2", color: "#b91c1c", border: "none", fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", cursor: "pointer" }}
+            >
+              <i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </button>
             <a href="/" style={{ padding: "8px 16px", borderRadius: "8px", background: "#0f172a", color: "white", textDecoration: "none", fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px" }}>
               <i className="fa-solid fa-arrow-left"></i> Back to Site
             </a>

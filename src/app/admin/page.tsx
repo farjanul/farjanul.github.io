@@ -1,25 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../AppContext";
+import { loginUser } from "./actions";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setIsAdmin } = useAppContext();
+  const { isAdmin, setIsAdmin } = useAppContext();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (isAdmin) {
+      router.push("/add-content");
+    }
+  }, [isAdmin, router]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (username === "admin" && password === "admin123") {
-      setIsAdmin(true);
-      router.push("/");
-    } else {
-      setError("Invalid username or password");
-    }
+    
+    startTransition(async () => {
+      const result = await loginUser(username, password);
+      
+      if (result.success) {
+        setIsAdmin(true);
+        router.push("/add-content");
+      } else {
+        setError(result.error || "Invalid username or password");
+      }
+    });
   };
 
   return (

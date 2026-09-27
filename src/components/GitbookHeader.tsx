@@ -18,7 +18,7 @@ export default function GitbookHeader({
   onSearch,
   searchQuery = "",
 }: GitbookHeaderProps) {
-  const { language, isAdmin } = useAppContext();
+  const { language, isAdmin, setIsAdmin } = useAppContext();
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
@@ -109,13 +109,24 @@ export default function GitbookHeader({
 
           {/* Admin Panel button if logged in */}
           {isAdmin && (
-            <Link
-              href="/admin"
-              className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline"
-              title={language === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel"}
-            >
-              <i className="fa-solid fa-gear text-xs"></i>
-            </Link>
+            <>
+              <Link
+                href="/add-content"
+                className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline"
+                title={language === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel"}
+              >
+                <i className="fa-solid fa-gear text-xs"></i>
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsAdmin(false)}
+                className="p-2 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 dark:border-red-900/30 dark:bg-red-900/20 dark:hover:bg-red-900/40 dark:text-red-400 transition-colors flex items-center justify-center size-8 shrink-0 cursor-pointer"
+                title={language === "bn" ? "লগআউট" : "Logout"}
+                aria-label="Logout"
+              >
+                <i className="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+              </button>
+            </>
           )}
 
           {/* Theme switcher */}

@@ -132,6 +132,33 @@ export default function GitbookHeader({
               <i className="fa-solid fa-moon text-tint-strong text-xs"></i>
             )}
           </button>
+
+          {/* Social Links Divider */}
+          <div className="h-4 w-px bg-tint-subtle mx-0.5 hidden sm:block" />
+
+          {/* GitHub Profile */}
+          <a
+            href="https://github.com/farjanul"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline hover:text-primary"
+            title="GitHub: farjanul"
+            aria-label="GitHub Profile"
+          >
+            <i className="fa-brands fa-github text-sm"></i>
+          </a>
+
+          {/* LinkedIn Profile */}
+          <a
+            href="https://www.linkedin.com/in/farjanuln/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-xl border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong transition-colors flex items-center justify-center size-8 shrink-0 no-underline hover:text-[#0a66c2]"
+            title="LinkedIn: farjanuln"
+            aria-label="LinkedIn Profile"
+          >
+            <i className="fa-brands fa-linkedin text-sm"></i>
+          </a>
         </div>
 
       </div>

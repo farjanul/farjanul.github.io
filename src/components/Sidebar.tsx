@@ -39,7 +39,7 @@ export default function Sidebar({
 }) {
   const { language } = useAppContext();
   const [groups, setGroups] = useState<GroupItem[]>([]);
-  const [expandedTopics, setExpandedTopics] = useState<Record<number, boolean>>({});
+  const [expandedTopicId, setExpandedTopicId] = useState<number | null>(null);
   const [expandedGroups, setExpandedGroups] = useState<Record<number, boolean>>({});
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +55,7 @@ export default function Sidebar({
   }, []);
 
   const toggleTopic = (id: number) => {
-    setExpandedTopics((prev) => ({ ...prev, [id]: !prev[id] }));
+    setExpandedTopicId((prev) => (prev === id ? null : id));
   };
 
   const toggleGroup = (id: number) => {
@@ -148,7 +148,7 @@ export default function Sidebar({
                   if (item.type === "topic") {
                     const topic = item.data as TopicItem;
                     const hasChildren = topic.contents.length > 0;
-                    const isExpanded = expandedTopics[topic.id] ?? false;
+                    const isExpanded = expandedTopicId === topic.id;
 
                     if (hasChildren) {
                       // Topic with children — expandable

@@ -51,27 +51,35 @@ export default function GitbookSidebar({
   onCloseMobile,
 }: GitbookSidebarProps) {
   const { language } = useAppContext();
-  const [expandedTopics, setExpandedTopics] = useState<Record<number, boolean>>({});
+  const [expandedTopicId, setExpandedTopicId] = useState<number | null>(() => {
+    if (!selectedContentId || !groups) return null;
+    for (const group of groups) {
+      for (const topic of group.topics || []) {
+        if ((topic.contents || []).some((c) => c.id === selectedContentId)) {
+          return topic.id;
+        }
+      }
+    }
+    return null;
+  });
 
-  // Auto-expand topic if selected content belongs to it
+  // Auto-expand topic if selected content belongs to it, collapsing others
   useEffect(() => {
     if (!selectedContentId || !groups) return;
 
-    groups.forEach((group) => {
-      (group.topics || []).forEach((topic) => {
+    for (const group of groups) {
+      for (const topic of group.topics || []) {
         const hasActive = (topic.contents || []).some((c) => c.id === selectedContentId);
         if (hasActive) {
-          setExpandedTopics((prev) => ({ ...prev, [topic.id]: true }));
+          setExpandedTopicId(topic.id);
+          return;
         }
-      });
-    });
+      }
+    }
   }, [selectedContentId, groups]);
 
   const toggleTopic = (topicId: number) => {
-    setExpandedTopics((prev) => ({
-      ...prev,
-      [topicId]: prev[topicId] !== undefined ? !prev[topicId] : false,
-    }));
+    setExpandedTopicId((prev) => (prev === topicId ? null : topicId));
   };
 
   // Sort groups by position
@@ -101,7 +109,7 @@ export default function GitbookSidebar({
             return (
               <li key={group.id} className={`page-group-item flex flex-col ${gIdx > 0 ? "mt-4" : "mt-1"}`}>
                 {/* Group Title Header */}
-                <div className="sticky top-0 z-1 bg-inherit pt-2 pb-1">
+                <div className="pt-2 pb-1">
                   <div className="relative flex flex-row items-center gap-3 p-1.5 pl-3 min-h-8 text-left font-heading font-semibold text-xs uppercase tracking-wider text-tint-strong/8">
                     <span className="min-w-0 flex-1 truncate">{group.name}</span>
                   </div>
@@ -116,7 +124,7 @@ export default function GitbookSidebar({
                         (a, b) => (a.position ?? 0) - (b.position ?? 0)
                       );
                       const hasContents = topicContents.length > 0;
-                      const isExpanded = expandedTopics[topic.id] ?? true;
+                      const isExpanded = expandedTopicId === topic.id;
 
                       return (
                         <li key={`topic-${topic.id}`} className="page-topic-item flex flex-col mt-0.5">

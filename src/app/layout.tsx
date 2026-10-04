@@ -10,8 +10,8 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "CMS Notes",
-  description: "Gitbook style Next.js CMS",
+  title: "Farjanul's Notebook",
+  description: "Farjanul's Notebook for writting programming and system design",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

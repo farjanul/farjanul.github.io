@@ -109,7 +109,7 @@ export async function generateMetadata({
       locale: "bn_BD",
       publishedTime: content.created_at ? content.created_at.toISOString() : undefined,
       modifiedTime: content.updated_at ? content.updated_at.toISOString() : undefined,
-      authors: ["Farjanul Islam"],
+      authors: ["Farjanul Nayem"],
       images: [
         {
           url: `${siteUrl}/assets/img/banner.jpeg`,

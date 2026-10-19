@@ -122,19 +122,17 @@ export default function HomePageClient({ initialGroups = [], initialSlug }: Home
   // Update document title when selectedContent changes
   useEffect(() => {
     if (selectedContent) {
-      document.title = `${selectedContent.title} | Farjanul Notebook`;
+      document.title = `${selectedContent.title} | Farjanul Notes`;
     } else {
-      document.title = "Farjanul Notebook";
+      document.title = "Farjanul Notes - প্রোগ্রামিং ও সিস্টেম ডিজাইন নোটবুক";
     }
   }, [selectedContent]);
 
-  // Compute active body based on selected language
+  // Compute active body based on bn Bengali content
   const activeBody = useMemo(() => {
     if (!selectedContent) return "";
-    return language === "bn"
-      ? selectedContent.body_bn || selectedContent.body_en
-      : selectedContent.body_en || selectedContent.body_bn;
-  }, [selectedContent, language]);
+    return selectedContent.body_bn || selectedContent.body_en;
+  }, [selectedContent]);
 
   // Inject heading IDs for smooth table of contents scrolling
   const processedBody = useMemo(() => {
@@ -444,8 +442,8 @@ export default function HomePageClient({ initialGroups = [], initialSlug }: Home
 
                 {/* Actions: Language Toggle & Copy Content */}
                 <div className="flex items-center gap-2 shrink-0 mt-1">
-                  {/* Language Toggle Button */}
-                  <button
+                  {/* Language Toggle Button (temporarily commented out) */}
+                  {/* <button
                     type="button"
                     onClick={() => setLanguage(language === "en" ? "bn" : "en")}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong/7 hover:text-tint-strong text-xs font-medium transition-colors cursor-pointer shrink-0"
@@ -453,17 +451,18 @@ export default function HomePageClient({ initialGroups = [], initialSlug }: Home
                   >
                     <i className="fa-solid fa-language text-sm"></i>
                     <span>{language === "en" ? "Change to Bengali" : "Change to English"}</span>
-                  </button>
+                  </button> */}
 
                   {/* Copy Content Button */}
                   <button
                     type="button"
                     onClick={handleCopyContent}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong/7 hover:text-tint-strong text-xs font-medium transition-colors cursor-pointer shrink-0"
-                    title="Copy content"
+                    className="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-1.5 rounded-lg border border-tint-subtle bg-tint-subtle/50 hover:bg-tint-hover text-tint-strong/7 hover:text-tint-strong text-xs font-medium transition-colors cursor-pointer shrink-0"
+                    title={copied ? "Copied!" : "Copy content"}
+                    aria-label="Copy content"
                   >
                     <i className={`fa-regular ${copied ? "fa-circle-check text-emerald-500" : "fa-copy"}`}></i>
-                    <span>{copied ? "Copied!" : "Copy"}</span>
+                    <span className="hidden sm:inline">{copied ? "Copied!" : "Copy"}</span>
                   </button>
                 </div>
               </header>

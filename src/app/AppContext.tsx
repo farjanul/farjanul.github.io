@@ -12,36 +12,24 @@ type AppContextType = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<"en" | "bn">("en");
+  const [language, setLanguage] = useState<"en" | "bn">("bn");
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // 1. Check if user already has a saved language preference in localStorage
-    const savedLang = localStorage.getItem("preferredLanguage");
-    if (savedLang === "en" || savedLang === "bn") {
-      setLanguage(savedLang);
-    } else {
-      // 2. Only if user has never set a preference, detect from location / timezone
-      try {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        if (tz.includes("Dhaka") || tz.includes("Asia/Dhaka")) {
-          setLanguage("bn");
-        } else {
-          setLanguage("en");
-        }
-      } catch (e) {
-        setLanguage("en");
-      }
-    }
+    let isMounted = true;
+    checkSessionUser()
+      .then((res) => {
+        if (isMounted) setIsAdmin(res.isLoggedIn);
+      })
+      .catch(() => {
+        if (isMounted) setIsAdmin(false);
+      });
 
-    // Check if admin is logged in securely from server
-    checkSessionUser().then((res) => {
-      setIsAdmin(res.isLoggedIn);
-    }).catch(() => {
-      setIsAdmin(false);
-    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleSetLanguage = (lang: "en" | "bn") => {
